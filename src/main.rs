@@ -19,10 +19,7 @@ fn main() {
 fn run(config: Config) -> Result<(), Box<Error>> {
     
     match config.operation.as_ref() {
-        "nodes" => list_nodes(&config.files[0])?,
-        "json" => to_json(&config.files[0])?,
-        "remove" => sif_quick_remove(&config.files[0], &config.files[1])?,
-        "overlay" => sif_overlay(&config.files[0], &config.files[1])?,
+        "gen" => gen_data(&config.remainder[0], &config.remainder[1])?,
         _ => println!("Unimplemented operation"),
     }
 
@@ -31,7 +28,7 @@ fn run(config: Config) -> Result<(), Box<Error>> {
 
 struct Config {
     operation: String,
-    files: Vec<String>,
+    remainder: Vec<String>,
 }
 
 impl Config {
@@ -43,15 +40,14 @@ impl Config {
             None => return Err("No operation specified".to_string()),
         };
 
-        let files: Vec<String> = args.collect();
+        let remainder: Vec<String> = args.collect();
 
         match operation.as_ref() {
-            "remove" | "overlay"  => { if files.len() < 2 { return Err(format!("{}: too few inputs specified", operation)) } },
-            "nodes" | "json" | "test" => { if files.len() < 1 { return Err(format!("{}: requires input", operation)) } },
+            "gen" => { if remainder.len() < 2 { return Err(format!("{}: too few inputs specified", operation)) } },
             _ => return Err(format!("{}: Unknown operation", operation)),
         }
             
 
-        Ok(Config { operation, files })
+        Ok(Config { operation, remainder })
     }
 }

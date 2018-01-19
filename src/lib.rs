@@ -23,6 +23,14 @@ pub fn read_file(filename: &str) -> Result<String, Box<Error>> {
     Ok(string)
 }
 
+pub fn gen_data(input_list: &str, size: &str) -> Result<(), Box<Error>> {
+    
+    let name_file = read_file(input_list)?;
+    let names: Vec<&str>  = name_file.lines().collect();
+
+    Ok(())
+}
+
 pub fn list_nodes(file: &str) -> Result<(), Box<Error>> {
 
     let contents = read_file(file)?;
