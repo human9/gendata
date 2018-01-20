@@ -4,6 +4,7 @@ version = "0.1.0"
 authors = ["john.salamon"]
 
 [dependencies]
+rand = "*"
 petgraph = "*"
 serde = "*"
 serde_json = "*"
