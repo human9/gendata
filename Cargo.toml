@@ -1,5 +1,5 @@
 [package]
-name = "sifter"
+name = "gendata"
 version = "0.1.0"
 authors = ["john.salamon"]
 

@@ -1,5 +1,5 @@
-extern crate sifter;
-use sifter::*;
+extern crate gendata;
+use gendata::*;
 
 use std::env;
 use std::process;

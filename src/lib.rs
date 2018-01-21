@@ -27,6 +27,8 @@ pub fn gen_data(input_list: &str, size_str: &str) -> Result<(), Box<Error>> {
     let mut rng = rand::thread_rng();
     let mean_range = Range::new(0f64, 1.);
     let dev_range = Range::new(15f64, 3000.);
+        
+    println!("name,x,y"); 
     for name in names {
     
         let x_mean = mean_range.ind_sample(&mut rng) * max_x as f64;
@@ -48,14 +50,13 @@ pub fn gen_data(input_list: &str, size_str: &str) -> Result<(), Box<Error>> {
         let normal_x = Normal::new(x_mean, x_dev);
         let normal_y = Normal::new(y_mean, y_dev);
 
-        println!("name,x,y"); 
         let mut v = Vec::new();
         for _i in 0..dots_per_name {
 
             let x = normal_x.ind_sample(&mut rand::thread_rng());
             let y = normal_y.ind_sample(&mut rand::thread_rng());
 
-            v.push(format!("{},{},{}", name, x, y)); 
+            v.push(format!("{},{:.3},{:.3}", name, x, y)); 
         }
         rand::thread_rng().shuffle(&mut v);
         for line in v {
